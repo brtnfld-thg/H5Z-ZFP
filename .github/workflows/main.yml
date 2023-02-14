@@ -75,7 +75,7 @@ jobs:
       run: |
         mkdir build; cd build
         cmake -D FORTRAN_INTERFACE=ON -D CMAKE_BUILD_TYPE=Release ..
-        make
+        cmake --build . --target install
         ctest -C Release .
       shell: bash
 
@@ -133,5 +133,4 @@ jobs:
             -TClangCL
           cmake --build . -j 3
           cmake --build . --target install
-          dir /s D:/a/H5Z-ZFP/H5Z-ZFP/build/src
           ctest --verbose -C Debug .
