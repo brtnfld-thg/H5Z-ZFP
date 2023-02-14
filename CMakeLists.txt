@@ -32,7 +32,28 @@ endif ()
 # Some boilerplate to setup nice output directories
 #------------------------------------------------------------------------------#
 set(CMAKE_INSTALL_INCLUDEDIR include)
-set(CMAKE_INSTALL_CMAKEDIR lib/cmake/h5z_zfp)
+#set(CMAKE_INSTALL_CMAKEDIR lib/cmake/h5z_zfp)
+
+#-----------------------------------------------------------------------------
+# set the installation paths
+#-----------------------------------------------------------------------------
+if(CMAKE_SYSTEM_NAME MATCHES Windows)
+    set(CMAKE_INSTALL_LIBDIR lib)
+    set(CMAKE_INSTALL_PLUGINDIR ${CMAKE_INSTALL_LIBDIR}/plugins)
+    set(CMAKE_INSTALL_SYSTEM_RUNTIME_DESTINATION ${CMAKE_INSTALL_PLUGINDIR})
+   
+    #ensure that runtime libraries are installed along with the plugins 
+    include(InstallRequiredSystemLibraries)    
+else()
+    include(GNUInstallDirs)
+
+    #
+    # TODO: need to setup the installation directories for Linux and Unix
+    #       systems
+    #
+    set(CMAKE_INSTALL_PLUGINDIR ${CMAKE_INSTALL_LIBDIR}/plugins)
+
+endif()
 
 #------------------------------------------------------------------------------#
 # Required packages
@@ -62,13 +83,13 @@ add_subdirectory(${CMAKE_SOURCE_DIR}/test)
 # Packaging
 #------------------------------------------------------------------------------#
 # Install h5z_zfp-config.cmake and h5z_zfp-config-version.cmake
-set(H5Z_ZFP_CONFIG_IN  ${CMAKE_CURRENT_SOURCE_DIR}/cmake/h5z_zfp-config.cmake.in)
-set(H5Z_ZFP_CONFIG_OUT ${CMAKE_CURRENT_BINARY_DIR}/cmake/h5z_zfp-config.cmake)
-configure_file(${H5Z_ZFP_CONFIG_IN} ${H5Z_ZFP_CONFIG_OUT} @ONLY)
-set(H5Z_ZFP_CONFIG_VERSION_IN  ${CMAKE_CURRENT_SOURCE_DIR}/cmake/h5z_zfp-config-version.cmake.in)
-set(H5Z_ZFP_CONFIG_VERSION_OUT ${CMAKE_CURRENT_BINARY_DIR}/cmake/h5z_zfp-config-version.cmake)
-configure_file(${H5Z_ZFP_CONFIG_VERSION_IN} ${H5Z_ZFP_CONFIG_VERSION_OUT} @ONLY)
-install(FILES ${H5Z_ZFP_CONFIG_OUT}
-        DESTINATION ${CMAKE_INSTALL_CMAKEDIR})
-install(FILES ${H5Z_ZFP_CONFIG_VERSION_OUT}
-        DESTINATION ${CMAKE_INSTALL_CMAKEDIR})
+#set(H5Z_ZFP_CONFIG_IN  ${CMAKE_CURRENT_SOURCE_DIR}/cmake/h5z_zfp-config.cmake.in)
+#set(H5Z_ZFP_CONFIG_OUT ${CMAKE_CURRENT_BINARY_DIR}/cmake/h5z_zfp-config.cmake)
+#configure_file(${H5Z_ZFP_CONFIG_IN} ${H5Z_ZFP_CONFIG_OUT} @ONLY)
+#set(H5Z_ZFP_CONFIG_VERSION_IN  ${CMAKE_CURRENT_SOURCE_DIR}/cmake/h5z_zfp-config-version.cmake.in)
+#set(H5Z_ZFP_CONFIG_VERSION_OUT ${CMAKE_CURRENT_BINARY_DIR}/cmake/h5z_zfp-config-version.cmake)
+#configure_file(${H5Z_ZFP_CONFIG_VERSION_IN} ${H5Z_ZFP_CONFIG_VERSION_OUT} @ONLY)
+#install(FILES ${H5Z_ZFP_CONFIG_OUT}
+#        DESTINATION ${CMAKE_INSTALL_CMAKEDIR})
+#install(FILES ${H5Z_ZFP_CONFIG_VERSION_OUT}
+#        DESTINATION ${CMAKE_INSTALL_CMAKEDIR})

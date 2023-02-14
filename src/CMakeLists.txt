@@ -46,9 +46,13 @@ target_include_directories(h5z_zfp_shared
     ${HDF5_INCLUDE_DIRS})
 target_link_libraries(h5z_zfp_shared PUBLIC zfp::zfp ${HDF5_LIBRARIES})
 set_target_properties(h5z_zfp_shared PROPERTIES OUTPUT_NAME h5zzfp)
+
 install(TARGETS h5z_zfp_shared
-  ARCHIVE DESTINATION plugin
-  LIBRARY DESTINATION plugin)
+        DESTINATION ${CMAKE_INSTALL_PLUGINDIR})
+
+#install(TARGETS h5z_zfp_shared
+#  ARCHIVE DESTINATION plugin
+#  LIBRARY DESTINATION plugin)
 
 #------------------------------------------------------------------------------#
 # Install header and module files.
@@ -58,5 +62,7 @@ install(FILES ${h5z_zfp_headers}
 
 if (FORTRAN_INTERFACE)
   install(FILES ${CMAKE_CURRENT_BINARY_DIR}/h5zzfp_props_f.mod
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+        DESTINATION ${CMAKE_INSTALL_PLUGINDIR})
+
+#    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 endif ()
