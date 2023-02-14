@@ -62,7 +62,7 @@ foreach (IRATE RANGE ${NRATES})
 #                     ENVIRONMENT
 #                     "HDF5_PLUGIN_PATH=$<TARGET_FILE_DIR:h5z_zfp_plugin>")
 #  set_property(TEST test-rate-write-${RATE} test-rate-read-${RATE} APPEND PROPERTY ENVIRONMENT HDF5_PLUGIN_PATH=${CMAKE_INSTALL_PREFIX}/lib)
-  set_property(TEST test-rate-write-${RATE} test-rate-read-${RATE} APPEND PROPERTY ENVIRONMENT "HDF5_PLUGIN_PATH=$<TARGET_FILE_DIR:h5z_zfp_shared>")
+  set_property(TEST test-rate-write-${RATE} test-rate-read-${RATE} APPEND PROPERTY ENVIRONMENT ${CMAKE_INSTALL_PLUGINDIR})
   set_tests_properties(test-rate-write-${RATE}   PROPERTIES FIXTURES_SETUP    "rate-read-${RATE};rate-cleanup-${RATE}")
   set_tests_properties(test-rate-write-${RATE}   PROPERTIES FIXTURES_REQUIRED "rate-write-${RATE}")
   set_tests_properties(test-rate-read-${RATE}    PROPERTIES FIXTURES_REQUIRED "rate-read-${RATE}")
