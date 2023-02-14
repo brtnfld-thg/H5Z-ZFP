@@ -57,10 +57,10 @@ foreach (IRATE RANGE ${NRATES})
   add_test(NAME test-rate-write-${RATE}   COMMAND test_write_plugin zfpmode=1 rate=${RATE} ofile=test_zfp-rate-${RATE}.h5)
   add_test(NAME test-rate-read-${RATE}    COMMAND test_read_plugin max_absdiff=${DIFF} max_reldiff=${DIFF} ifile=test_zfp-rate-${RATE}.h5)
   add_test(NAME test-rate-cleanup-${RATE} COMMAND ${CMAKE_COMMAND} -E remove test_zfp-rate-${RATE}.h5)
-  set_tests_properties("HDF5:external_filters:LZ4"
-                     PROPERTIES
-                     ENVIRONMENT
-                     "HDF5_PLUGIN_PATH=$<TARGET_FILE_DIR:lz4_plugin>")
+#  set_tests_properties("HDF5:external_filters:h5z_zfp_shared"
+#                     PROPERTIES
+#                     ENVIRONMENT
+#                     "HDF5_PLUGIN_PATH=$<TARGET_FILE_DIR:h5z_zfp_plugin>")
 #  set_property(TEST test-rate-write-${RATE} test-rate-read-${RATE} APPEND PROPERTY ENVIRONMENT HDF5_PLUGIN_PATH=${CMAKE_INSTALL_PREFIX}/lib)
   set_property(TEST test-rate-write-${RATE} test-rate-read-${RATE} APPEND PROPERTY ENVIRONMENT "HDF5_PLUGIN_PATH=$<TARGET_FILE_DIR:h5z_zfp_shared>")
   set_tests_properties(test-rate-write-${RATE}   PROPERTIES FIXTURES_SETUP    "rate-read-${RATE};rate-cleanup-${RATE}")
