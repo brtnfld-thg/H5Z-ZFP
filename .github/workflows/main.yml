@@ -133,4 +133,5 @@ jobs:
             -TClangCL
           cmake --build . -j 3
           cmake --build . --target install
+          dir /s D:/a/H5Z-ZFP/H5Z-ZFP/build/src
           ctest --verbose -C Debug .
