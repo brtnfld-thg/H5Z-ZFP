@@ -133,7 +133,4 @@ jobs:
             -TClangCL
           cmake --build . -j 3
           cmake --build . --target install
-          Dir C:/Program Files/H5Z_ZFP/plugin
-          Dir C:/Program Files/H5Z_ZFP/include
-          Dir C:/Program Files/H5Z_ZFP/lib/h5zzfp.lib
           ctest --verbose -C Debug .
