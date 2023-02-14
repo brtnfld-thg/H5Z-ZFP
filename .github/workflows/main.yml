@@ -75,7 +75,7 @@ jobs:
       run: |
         mkdir build; cd build
         cmake -D FORTRAN_INTERFACE=ON -D CMAKE_BUILD_TYPE=Release ..
-        cmake --build . --target install
+        sudo cmake --build . --target install
         ctest -C Release .
       shell: bash
 
@@ -133,4 +133,7 @@ jobs:
             -TClangCL
           cmake --build . -j 3
           cmake --build . --target install
+          dir C:/Program Files/H5Z_ZFP/plugin
+          dir C:/Program Files/H5Z_ZFP/include
+          dir C:/Program Files/H5Z_ZFP/lib/h5zzfp.lib
           ctest --verbose -C Debug .
