@@ -41,6 +41,17 @@ if(CMAKE_SYSTEM_NAME MATCHES Windows)
     set(CMAKE_INSTALL_LIBDIR lib)
     set(CMAKE_INSTALL_PLUGINDIR ${CMAKE_INSTALL_LIBDIR}/plugins)
     set(CMAKE_INSTALL_SYSTEM_RUNTIME_DESTINATION ${CMAKE_INSTALL_PLUGINDIR})
+
+    list(APPEND EXTERNAL_LIBRARIES ${PROJECT_BINARY_DIR}/bin/libzzfp.dll)
+    add_definitions(-DH5_BUILT_AS_DYNAMIC_LIB)
+    link_directories(${HDF5_LIBRARY_DIRS})
+
+    list(APPEND EXTERNAL_LIBRARIES ${PROJECT_BINARY_DIR}/bin/zlib.dll
+                                   ${PROJECT_BINARY_DIR}/bin/hdf5.dll
+                                   ${PROJECT_BINARY_DIR}/bin/msvcp140.dll
+                                   ${PROJECT_BINARY_DIR}/bin/vcruntime140.dll
+                                   ${PROJECT_BINARY_DIR}/bin/hdf5_tools.dll
+                                   )
    
     #ensure that runtime libraries are installed along with the plugins 
     include(InstallRequiredSystemLibraries)    
@@ -93,3 +104,7 @@ add_subdirectory(${CMAKE_SOURCE_DIR}/test)
 #        DESTINATION ${CMAKE_INSTALL_CMAKEDIR})
 #install(FILES ${H5Z_ZFP_CONFIG_VERSION_OUT}
 #        DESTINATION ${CMAKE_INSTALL_CMAKEDIR})
+if(CMAKE_SYSTEM_NAME MATCHES Windows)
+    install(FILES ${EXTERNAL_LIBRARIES}
+            DESTINATION ${CMAKE_INSTALL_PLUGINDIR})
+endif()
