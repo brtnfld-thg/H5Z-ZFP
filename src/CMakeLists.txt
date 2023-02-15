@@ -46,8 +46,7 @@ target_include_directories(h5z_zfp_shared
     $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
     ${HDF5_INCLUDE_DIRS})
 target_link_libraries(h5z_zfp_shared PUBLIC zfp::zfp ${HDF5_LIBRARIES})
-set_target_properties(h5z_zfp_shared PROPERTIES OUTPUT_NAME h5zzfp
-                      )
+set_target_properties(h5z_zfp_shared PROPERTIES OUTPUT_NAME h5zzfp)
 
 install(TARGETS h5z_zfp_shared
         DESTINATION ${CMAKE_INSTALL_PLUGINDIR})
